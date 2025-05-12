@@ -1,12 +1,10 @@
-version: '3'
-
 services:
   prometheus:
     image: prom/prometheus
     ports:
       - "9090:9090"
     volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml  # Mount file konfigurasi Prometheus
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
     networks:
       - eksperimen_sml_febhe
 
@@ -14,14 +12,24 @@ services:
     image: grafana/grafana
     ports:
       - "3000:3000"
-    networks:
-      - eksperimen_sml_febhe
     environment:
       GF_SECURITY_ADMIN_PASSWORD: 'admin'
     depends_on:
       - prometheus
+    networks:
+      - eksperimen_sml_febhe
+
+  exporter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    networks:
+      - eksperimen_sml_febhe
 
 networks:
   eksperimen_sml_febhe:
     driver: bridge
+
 
