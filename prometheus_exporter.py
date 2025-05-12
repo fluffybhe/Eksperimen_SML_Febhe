@@ -9,8 +9,8 @@ PREPROCESS_TIME = Summary('data_preprocessing_duration_seconds', 'Time spent pre
 @PREPROCESS_TIME.time()
 def preprocess_data(raw_data):
     # Mengisi missing values dengan rata-rata untuk kolom total_bedrooms
-    raw_data['total_bedrooms'].fillna(raw_data['total_bedrooms'].mean(), inplace=True)
-    
+    raw_data['total_bedrooms'] = raw_data['total_bedrooms'].fillna(raw_data['total_bedrooms'].mean())
+
     # Label encoding untuk kolom 'ocean_proximity'
     label_encoder = LabelEncoder()
     raw_data['ocean_proximity'] = label_encoder.fit_transform(raw_data['ocean_proximity'])
