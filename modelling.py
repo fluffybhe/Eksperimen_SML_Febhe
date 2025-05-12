@@ -5,6 +5,19 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error
 
+import mlflow
+import dagshub
+
+# Inisialisasi DagsHub
+dagshub.init(repo_owner='fluffybhe', repo_name='Eksperimen_SML_Febhe', mlflow=True)
+
+# Mengatur tracking URI ke DagsHub
+mlflow.set_tracking_uri("https://dagshub.com/fluffybhe/Eksperimen_SML_Febhe.mlflow")
+
+# Set experiment jika diperlukan
+mlflow.set_experiment("experiment_name")
+
+
 # Membaca data yang telah diproses
 data = pd.read_csv('namadataset_preprocessing/processed_california_housing.csv')
 
