@@ -5,3 +5,9 @@ seaborn
 flask
 prometheus_client
 docker
+flask
+prometheus_client
+pandas
+scikit-learn
+mlflow
+dagshub
