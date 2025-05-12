@@ -1,29 +1,23 @@
-version: '3'
 services:
-  api:
-    build: .
-    ports:
-      - "5000:5000"
-    volumes:
-      - .:/app
-    environment:
-      - FLASK_APP=app.py
-      - FLASK_RUN_HOST=0.0.0.0
-
   prometheus:
     image: prom/prometheus
-    container_name: prometheus
     ports:
       - "9090:9090"
-    volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - eksperimen_sml_febhe
 
   grafana:
     image: grafana/grafana
-    container_name: grafana
     ports:
       - "3000:3000"
+    networks:
+      - eksperimen_sml_febhe
     environment:
-      - GF_SECURITY_ADMIN_PASSWORD=admin
+      GF_SECURITY_ADMIN_PASSWORD: 'admin'
     depends_on:
       - prometheus
+
+networks:
+  eksperimen_sml_febhe:
+    driver: bridge
+
